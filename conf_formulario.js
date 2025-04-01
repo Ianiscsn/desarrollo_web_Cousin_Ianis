@@ -22,17 +22,20 @@ const validadorTel = (tel) => {
     return true;
 };
 
-const validadorContact = (contact, id_contact) => {
-    let selectedOptions = [...contact.selectedOptions];
-    let selectedOptions1 = Array.from(contact.selectedOptions).map(option => option.value);
-    let valid = true;
-    if (selectedOptions1.includes("ninguno")) return true;
-    if (selectedOptions.length > 0){
-        if (id_contact.length >50 || id_contact.length < 4){
-            valid = false;
+const validadorContact = (checkboxes) => {
+    let count = 0;
+    let isValid = true;
+
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            count++;
+            let input = document.getElementById(checkbox.name);
+            if (input.value.length < 4 || input.value.length > 50) {
+                isValid = false;
+            } 
         }
-    };
-    return (valid && selectedOptions.length < 6);
+    });
+    return isValid && count < 6;
 };
 
 const validadorDateIn = (date_in) => {
@@ -75,15 +78,22 @@ const validadorDateTe = (dates_ter, dates_in) => {
     return validador;
 }
 
-const validadorTema = (tema, desc_tema) => {
-    let selectedOptions = Array.from(tema.selectedOptions).map(option => option.value);
-    let valid = true ; 
-    if (selectedOptions.includes("otro")){
-        if (desc_tema.length < 3 || desc_tema.length > 15){
-            valid = false;
+const validadorTema = (tema) => {
+    let count = 0;
+    let isValid = true;
+
+    tema.forEach(checkbox => {
+        if (checkbox.checked) {
+            count++;
+            if (checkbox.name == "otra-tema"){
+                let input = document.getElementById(checkbox.name);
+                if (input.value.length < 3 || input.value.length > 15) {
+                    isValid = false;
+                }
+            } 
         }
-    }
-    return (valid && selectedOptions.length>0);
+    });
+    return isValid && count > 0;
 }
 
 const validadorFoto = (file) => {
@@ -100,13 +110,11 @@ function confirmación(event) {
     let nombre = document.getElementById("nombre");
     let email = document.getElementById("email");
     let tele = document.getElementById("tel");
-    let contact = document.getElementById("contact");
-    let id_contact = document.getElementById("id_contact");
+    let checkboxes = document.querySelectorAll(".select-comp input[type='checkbox']");
 
     let date_in = document.getElementById("date_in");
     let date_ter = document.getElementById("date_ter");
-    let tema = document.getElementById("tema");
-    let desc_tema = document.getElementById("desc_tema");
+    let tema = document.querySelectorAll(".select-comp-tema input[type='checkbox']");
     let file = document.getElementById("file");
 
     msg="";
@@ -129,7 +137,7 @@ function confirmación(event) {
     if (!validadorTel(tele.value)){
         msg += "tele invalido\n";
     }
-    if (!validadorContact(contact, id_contact.value)){
+    if (!validadorContact(checkboxes)){
         msg += "contact invalido\n";
     }
     if (!validadorDateIn(date_in.value)){
@@ -138,7 +146,7 @@ function confirmación(event) {
     if (!validadorDateTe(date_ter.value, date_in.value)){
         msg += "date_ter invalido\n";
     }
-    if (!validadorTema(tema, desc_tema.value)){
+    if (!validadorTema(tema)){
         msg += "tema invalido\n";
     }
     if (!validadorFoto(file)){

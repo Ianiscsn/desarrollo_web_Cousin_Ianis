@@ -15,30 +15,19 @@ function setCurrentDateTime() {
     document.getElementById("date_ter").value = finalDateTime;
 };
 
- function updateContact() {
-    let selectedOptions = [...this.selectedOptions];
-
-    let select = document.getElementById("contact");
-    let selectedOptions1 = Array.from(select.selectedOptions).map(option => option.value);
-
-    if (selectedOptions.length > 0 && !selectedOptions1.includes("ninguno")) {
-        document.getElementById("id_contact_container").style.display = "block";
+function updateTema(element){
+    if (element.checked){
+        document.getElementById(element.name).style.display = "block";
     } else {
-        document.getElementById("id_contact_container").style.display = "none";
-    }
-    if (selectedOptions.length > 5) {
-        alert("Vous ne pouvez sélectionner que 5 options maximum.");
-        selectedOptions[selectedOptions.length - 1].selected = false;
+        document.getElementById(element.name).style.display = "none";
     }
 };
 
- function updateTema() {
-    let select = document.getElementById("tema");
-    let selectedOptions = Array.from(select.selectedOptions).map(option => option.value);
-    if (selectedOptions.includes("otro")) {
-        document.getElementById("id_contact_container2").style.display = "block";
+function updateLabel(element){
+    if (element.checked){
+        document.getElementById(element.name).style.display = "block";
     } else {
-        document.getElementById("id_contact_container2").style.display = "none";
+        document.getElementById(element.name).style.display = "none";
     }
 };
 
@@ -438,8 +427,7 @@ function nada() {
 
 
 window.onload = setCurrentDateTime;
-document.getElementById("contact").addEventListener("change", updateContact);
-document.getElementById("tema").addEventListener("change", updateTema);
+//document.getElementById("tema").addEventListener("change", updateTema);
 document.getElementById("add-photo").addEventListener("click", anadirFoto);
 document.getElementById("región").addEventListener("change", modificarComunas);
 document.getElementById("btnSi").addEventListener("click", validacion);

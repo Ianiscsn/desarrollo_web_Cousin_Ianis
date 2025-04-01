@@ -68,20 +68,38 @@
                 </div>
 
                 <div class="trans-input-select">
-                    <label for="contact"> Contactar por :</label>
-                    <select id="contact" name="contact"  multiple size="7">
-                        <option value="ninguno">Ninguno</option>
-                        <option value="solution1">Whatsapp</option>
-                        <option value="solution2">Telegram</option>
-                        <option value="solution3">X</option>
-                        <option value="solution4">Instagram</option>
-                        <option value="solution5">TikTok</option>
-                        <option value="solution6">Otra</option>
-                    </select>
-                </div>
+                    <label> Contactar por :</label>
+                    <div class="select-border">
+                        <div class="select-comp">
+                            <input type="checkbox" name="whatsapp" onchange="updateLabel(this)"> Whatsapp
+                            <input type="text" id="whatsapp" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50">
+                        </div>
 
-                <div id="id_contact_container" class="trans-input-contact">
-                    <input id="id_contact" name="id_contact" placeholder="Id de contacto o URL de red social" type="text" minlength="4" maxlength="50">
+                        <div class="select-comp">
+                            <input type="checkbox" name="telegram" onchange="updateLabel(this)"> Telegram
+                            <input type="text" id="telegram" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50">
+                        </div>
+
+                        <div class="select-comp">
+                            <input type="checkbox" name="x" onchange="updateLabel(this)"> X
+                            <input type="text" id="x" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50">
+                        </div>
+
+                        <div class="select-comp">
+                            <input type="checkbox" name="instagram" onchange="updateLabel(this)"> Instagram
+                            <input type="text" id="instagram" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50">
+                        </div>
+
+                        <div class="select-comp">
+                            <input type="checkbox" name="tiktok" onchange="updateLabel(this)"> TikTok
+                            <input type="text" id="tiktok" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50">
+                        </div>
+
+                        <div class="select-comp">
+                            <input type="checkbox" name="otra" onchange="updateLabel(this)"> Otra
+                            <input type="text" id="otra" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50">
+                        </div>
+                    </div>
                 </div>
 
                 <hr>
@@ -103,23 +121,49 @@
                 </div>
                 
                 <div id="tema_input" class="trans-input-tema">
-                    <label for="tema"> Tema :</label>
-                    <select id="tema" name="tema" multiple>
-                        <option value="solution1">Música</option>
-                        <option value="solution2">Deporte</option>
-                        <option value="solution3">Ciencias</option>
-                        <option value="solution4">Religión</option>
-                        <option value="solution5">Política</option>
-                        <option value="solution6">Tecnología</option>
-                        <option value="solution7">Juegos</option>
-                        <option value="solution8">Baile</option>
-                        <option value="solution9">Comida</option>
-                        <option value="otro">Otro</option>
-                    </select>
-                </div>
+                    <label> Tema :</label>
+                    <div class="select-border-tema">
+                        <div class="select-comp-tema">
+                            <input type="checkbox" name="musica"> Música
+                        </div>
 
-                <div id="id_contact_container2" class="trans-input-contact">
-                    <input id="desc_tema" name="desc_tema" placeholder="Descripción del tema" type="text" minlength="3" maxlength="15">
+                        <div class="select-comp-tema">
+                            <input type="checkbox" name="deporte"> Deporte
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" name="ciencias"> Ciencias
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" name="religion"> Religión
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" name="politica"> Política
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" name="tecnologia"> Tecnología
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" name="juegos">  Juegos
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" name="baile"> baile
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" name="comida"> Comida
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" name="otra-tema" onchange="updateTema(this)" > Otra
+                            <input type="text" id="otra-tema" style="display: none;" placeholder="Descripción del tema" class="select-input-tema" minlength="3" maxlength="15">
+                        </div>
+                    </div>
                 </div>
 
                 <div id="file-container" class="trans-input-file">
