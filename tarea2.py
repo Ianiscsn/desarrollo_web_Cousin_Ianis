@@ -17,6 +17,8 @@ import re
 from datetime import datetime
 from typing import List
 import math
+from markupsafe import escape
+
 
 
 
@@ -118,6 +120,8 @@ app.secret_key = 'Ianis20310_'
 def portada():
     mensaje = None
     mensaje = request.args.get('mensaje') 
+    if mensaje :
+        mensaje = escape(mensaje)
     actividades = None
     session = getSession()
     actividades = session.execute(
@@ -210,6 +214,12 @@ def info():
 
 "--------------------------------------------------"
 
+def getSession():
+    connection_string = "mysql+pymysql://cc5002:programacionweb@localhost:3306/tarea2"
+    engine = create_engine(connection_string, echo=True)
+    return Session(engine)
+
+
 def agrega_actividad(session, region, comuna, sector, nombre, email, tel, date_in, date_ter, descripcion, files, contact, temas, tem_otra):
 
     validate = validacion( region, comuna, sector, nombre, email, tel, date_in, date_ter, files, contact, temas, tem_otra)
@@ -253,13 +263,6 @@ def agrega_actividad(session, region, comuna, sector, nombre, email, tel, date_i
     
     else : 
         return validate
-
-
-
-def getSession():
-    connection_string = "mysql+pymysql://cc5002:programacionweb@localhost:3306/tarea2"
-    engine = create_engine(connection_string, echo=True)
-    return Session(engine)
 
 
 def validacion(region, comuna, sector, nombre, email, tel, date_in, date_ter, file, contact, temas, tem_otra):
