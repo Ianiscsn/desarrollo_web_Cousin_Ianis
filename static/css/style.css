@@ -282,10 +282,26 @@ Pagina Agregar_actividad
     height : 50px;
 }
 
+.pagina-agregar .button_fin {
+    background-color: darkred;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    height : 50px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
 .pagina-agregar .bouton button:hover {
     background-color: darkred;
 }
 
+.pagina-agregar .button_fin:hover {
+    background-color: brown;
+}
 
 
 
@@ -308,14 +324,7 @@ Pagina Agregar_actividad
     height : 100%;
 }
 
-.pagina-agregar button {
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    text-align: center;
-}
+
 
 .pagina-agregar #btnSi {
     position : relative;
@@ -504,6 +513,49 @@ Pagina lista
     text-align: center; 
     vertical-align: middle; 
 }
+
+.pagina-lista .precedent {
+    position : relative;
+    color : white;
+    background-color: darkred;
+    width : 10%;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 50px;
+    align-items: center;
+} 
+
+.pagina-lista .suivant {
+    position : relative;
+    color : white;
+    background-color: darkred;
+    width : 10%;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 50px;
+    align-items: center;
+} 
+
+.pagina-lista .texte_page {
+    position : relative;
+    color : black;
+    border-radius: 5px;
+    margin-top: 50px;
+    margin-right: 30px;
+    margin-left: 30px;
+} 
+
+.pagina-lista .pagination {
+    position : relative;
+    color : white;
+    width : 100%;
+    border-radius: 5px;
+    margin-top: 50px;
+    display: flex;               
+    justify-content: center;
+    align-items: center;
+
+} 
 
 
 

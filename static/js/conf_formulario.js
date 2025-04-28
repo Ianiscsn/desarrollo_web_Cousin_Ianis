@@ -161,4 +161,3 @@ function confirmación(event) {
     document.getElementById("modalConfirm").style.display = "flex";
 };
 
-document.getElementById("agreg_actividad").addEventListener("click", confirmación);

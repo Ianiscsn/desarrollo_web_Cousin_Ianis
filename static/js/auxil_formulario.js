@@ -6,32 +6,43 @@ function setCurrentDateTime() {
     let hours = String(now.getHours()).padStart(2, '0');
     let minutes = String(now.getMinutes()).padStart(2, '0');
 
-    let hours_fin = String(parseInt(hours) + 3)
+    let hours_fin = String((parseInt(hours) + 3) % 24).padStart(2, '0');
     
     let currentDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
     let finalDateTime = `${year}-${month}-${day}T${hours_fin}:${minutes}`;
 
-    document.getElementById("date_in").value = currentDateTime;
-    document.getElementById("date_ter").value = finalDateTime;
+    const dateInInput = document.getElementById("date_in");
+    const dateTerInput = document.getElementById("date_ter");
+
+    if (!dateInInput.value) {
+        dateInInput.value = currentDateTime;
+    }
+
+    if (!dateTerInput.value) {
+        dateTerInput.value = finalDateTime;
+    }
+
 };
+
 
 function updateTema(element){
     if (element.checked){
-        document.getElementById(element.name).style.display = "block";
+        document.getElementById(element.value).style.display = "block";
     } else {
-        document.getElementById(element.name).style.display = "none";
+        document.getElementById(element.value).style.display = "none";
     }
 };
 
 function updateLabel(element){
     if (element.checked){
-        document.getElementById(element.name).style.display = "block";
+        document.getElementById(element.value).style.display = "block";
     } else {
-        document.getElementById(element.name).style.display = "none";
+        document.getElementById(element.value).style.display = "none";
     }
 };
 
 function anadirFoto() {
+
     let container = document.getElementById("file-container");
     let fileInputs = container.getElementsByTagName("input");
 
@@ -399,21 +410,40 @@ const comunasPorRegion = {
 };
 
 function modificarComunas() {
+
     let regionSelect = document.getElementById("región");
     let comunaSelect = document.getElementById("comuna");
 
     comunaSelect.innerHTML = '<option value="none">Seleccione una comuna</option>';
 
     let selectedRegion = regionSelect.value;
-    if (selectedRegion!=="none" && comunasPorRegion[selectedRegion]) {
-        comunasPorRegion[selectedRegion].forEach(comuna => {
-            let option = document.createElement("option");
-            option.value = comuna.toLowerCase().replace(/ /g, "_");
-            option.textContent = comuna;
-            comunaSelect.appendChild(option);
-        });
+    let selectedComuna = comunaSelect.dataset.selected;
+
+    // Applique la région sélectionnée
+    if (selectedRegion && selectedRegion !== "none") {
+        regionSelect.value = selectedRegion;
+
+        // Ensuite, génère les options de la comuna
+        if (comunasPorRegion[selectedRegion]) {
+            comunaSelect.innerHTML = '<option value="none">Seleccione una comuna</option>';  // Vide l'existant au cas où
+            comunasPorRegion[selectedRegion].forEach(comuna => {
+                let option = document.createElement("option");
+                option.value = comuna.toLowerCase().replace(/ /g, "_");
+                option.textContent = comuna;
+                if (option.value == selectedComuna){
+                    option.selected= true;
+                }
+                comunaSelect.appendChild(option);
+            });
+
+            }
     }
 };
+
+
+
+
+
 
 function validacion() {
     document.getElementById("modalConfirm").style.display = "none";
@@ -426,12 +456,14 @@ function nada() {
 };
 
 
-window.onload = setCurrentDateTime;
+
+window.onload = function () {
+    setCurrentDateTime();
+    modificarComunas();
+};
 //document.getElementById("tema").addEventListener("change", updateTema);
 document.getElementById("add-photo").addEventListener("click", anadirFoto);
 document.getElementById("región").addEventListener("change", modificarComunas);
-document.getElementById("btnSi").addEventListener("click", validacion);
-document.getElementById("btnNo").addEventListener("click", nada);
 
 
 
