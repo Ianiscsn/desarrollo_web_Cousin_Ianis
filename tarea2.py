@@ -161,6 +161,7 @@ def ag_act():
                 return render_template('Agregar_actividad.html', mensaje=agrega, info=info)
     return render_template('Agregar_actividad.html', info=info)
 
+
 @app.route('/estadisticas', methods=['GET'])
 def est():
     return render_template('Estadisticas.html')
@@ -234,8 +235,6 @@ def agrega_actividad(session, region, comuna, sector, nombre, email, tel, date_i
             act_id = actividad.id
 
             for te in temas : 
-                print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTema", te)
-                print(tem_otra)
                 if te == "otra-tema":
                     tema = ActividadTema(tema=te, glosa_otro=tem_otra, actividad_id=act_id)
                 else:
