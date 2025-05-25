@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Tarea 3 </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="pagina-agregar">
+    <div id ="content" class="content">
+        <div class="container-form">
+            <br>
+            <div class="title-transport">
+                <b>Agregar Actividad</b>
+            </div>
+            <br>
+
+            {% if mensaje %}
+            <ul style="color: red;">
+            <li><strong>{{ mensaje }}</strong></li>
+            </ul>
+            {% endif %}
+
+            <form class="transport-form" action="{{ url_for('ag_act') }}" method="post" enctype=multipart/form-data>
+                <p> <b>Partie I : ¿Dónde?</b></p>
+
+                <label for="región"> Región :</label>
+                <select id="región" name="región">
+                    <option value="none">Seleccione una región</option>
+                    <option value="arica" {% if info[0] == "arica" %}selected{% endif %}>Región de Arica y Parinacota</option>
+                    <option value="tarapaca" {% if info[0] == "tarapaca" %}selected{% endif %}>Región de Tarapacá</option>
+                    <option value="antofagasta" {% if info[0] == "antofagasta" %}selected{% endif %}>Región de Antofagasta</option>
+                    <option value="atacama" {% if info[0] == "atacama" %}selected{% endif %}>Región de Atacama</option>
+                    <option value="coquimbo" {% if info[0] == "coquimbo" %}selected{% endif %}>Región de Coquimbo</option>
+                    <option value="valparaiso" {% if info[0] == "valparaiso" %}selected{% endif %}>Región de Valparaíso</option>
+                    <option value="santiago" {% if info[0] == "santiago" %}selected{% endif %}>Región Metropolitana de Santiago</option>
+                    <option value="ohiggins" {% if info[0] == "ohiggins" %}selected{% endif %}>Región del Libertador General Bernardo O'Higgins</option>
+                    <option value="maule" {% if info[0] == "maule" %}selected{% endif %}>Región del Maule</option>
+                    <option value="ñuble" {% if info[0] == "ñuble" %}selected{% endif %}>Región de Ñuble</option>
+                    <option value="biobio" {% if info[0] == "biobio" %}selected{% endif %}>Región del Biobío</option>
+                    <option value="araucania" {% if info[0] == "araucania" %}selected{% endif %}>Región de La Araucanía</option>
+                    <option value="losrios" {% if info[0] == "losrios" %}selected{% endif %}>Región de Los Ríos</option>
+                    <option value="loslagos" {% if info[0] == "loslagos" %}selected{% endif %}>Región de Los Lagos</option>
+                    <option value="aysen" {% if info[0] == "aysen" %}selected{% endif %}>Región de Aysén del General Carlos Ibáñez del Campo</option>
+                    <option value="magallanes" {% if info[0] == "magallanes" %}selected{% endif %}>Región de Magallanes y de la Antártica Chilena</option>
+                </select>
+
+                <br>
+                
+                <label for="comuna"> Comuna :</label>
+                <select id="comuna" name="comuna" data-selected="{{ info[1] | default('none') }}">
+                    <option value="none">Seleccione una comuna</option>
+                </select>
+
+                <div id="Sector_input" class="trans-input">
+                    <input id="sector" name="sector" placeholder="Sector" type="text" maxlength="100" value="{{ info[2] or '' }}" >
+                </div>
+
+                <hr>
+
+                <p> <b>Partie II : ¿Quién organiza?</b></p>
+
+                <div id="Nombre_input" class="trans-input">
+                    <input id="nombre" name="nombre" placeholder="Nombre" type="text" maxlength="200" value="{{ info[3] or '' }}" required>
+                </div>
+
+                <div id="Email_input" class="trans-input">
+                    <input id="email" name="email" placeholder="Email" type="email" maxlength="200" value="{{ info[4] or '' }}" required>
+                </div>
+
+                <div id="Tel_input" class="trans-input">
+                    <input id="tel" name="tel" placeholder="Número de celular (+NNN.NNNNNNNN)" type="tel" value="{{ info[5] or '' }}">
+                </div>
+
+                <div class="trans-input-select">
+                    <label> Contact </label>
+                    <div class="select-border">
+                        <div class="select-comp">
+                            <input type="checkbox" name="contact_method" value="whatsapp" onchange="updateLabel(this)" {% if 'whatsapp' in info[10] %}checked{% endif %}> Whatsapp
+                            <input type="text" name="whatsapp_id" id="whatsapp" placeholder="ID" class="select-input" minlength="4" maxlength="50" {% if 'whatsapp' in info[10] %}style="display: block;" value="{{ info[10]['whatsapp'] or '' }}"{% endif %} {% if 'whatsapp' not in info[10] %}style="display: none;"{% endif %}>
+                        </div>
+
+                        <div class="select-comp">
+                            <input type="checkbox" name="contact_method" value="telegram" onchange="updateLabel(this)" {% if 'telegram' in info[10] %}checked{% endif %}> Telegram
+                            <input type="text" name="telegram_id" id="telegram" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50" {% if 'telegram' in info[10] %}style="display: block;" value="{{ info[10]['telegram'] or '' }}"{% endif %}{% if 'telegram' not in info[10] %}style="display: none;"{% endif %}>
+                        </div>
+
+                        <div class="select-comp">
+                            <input type="checkbox" name="contact_method" value="x" onchange="updateLabel(this)" {% if 'x' in info[10] %}checked{% endif %}> X
+                            <input type="text" name="x_id" id="x" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50" {% if 'x' in info[10] %}style="display: block;" value="{{ info[10]['x'] or '' }}"{% endif %}{% if 'x' not in info[10] %}style="display: none;"{% endif %}>
+                        </div>
+
+                        <div class="select-comp">
+                            <input type="checkbox" name="contact_method" value="instagram" onchange="updateLabel(this)" {% if 'instagram' in info[10] %}checked{% endif %}> Instagram
+                            <input type="text" name="instagram_id" id="instagram" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50" {% if 'instagram' in info[10] %}style="display: block;" value="{{ info[10]['instagram'] or '' }}"{% endif %}{% if 'instagram' not in info[10] %}style="display: none;"{% endif %}>
+                        </div>
+
+                        <div class="select-comp">
+                            <input type="checkbox" name="contact_method" value="tiktok" onchange="updateLabel(this)" {% if 'tiktok' in info[10] %}checked{% endif %}> TikTok
+                            <input type="text" name="tiktok_id" id="tiktok" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50" {% if 'tiktok' in info[10] %}style="display: block;" value="{{ info[10]['tiktok'] or '' }}" {% endif %}{% if 'tiktok' not in info[10] %}style="display: none;"{% endif %}>
+                        </div>
+
+                        <div class="select-comp">
+                            <input type="checkbox" name="contact_method" value="otra" onchange="updateLabel(this)" {% if 'otra' in info[10] %}checked{% endif %}> Otra
+                            <input type="text" name="otra_id" id="otra" style="display: none;" placeholder="ID" class="select-input" minlength="4" maxlength="50" {% if 'otra' in info[10] %}style="display: block;" value="{{ info[10]['otra'] or '' }}"{% endif %}{% if 'otra' not in info[10] %}style="display: none;"{% endif %}>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p> <b>Partie III : ¿Cuándo y de qué trata?:</b></p>
+
+                <div id="DateIn_input" class="trans-input-date">
+                    <label for="date_in">Inicio : </label>
+                    <input id="date_in" name="date_in"  type="datetime-local" value="{{ info[6] or ''}}" required>
+                </div>
+
+                <div id="DateTer_input" class="trans-input-date">
+                    <label for="date_ter">Término : </label>
+                    <input id="date_ter" name="date_ter"  type="datetime-local" value="{{ info[7] or '' }}">
+                </div>
+
+                <div id="descripción_input" class="trans-input">
+                    <textarea id="descripción" name="descripción" placeholder="Descripción" cols="50" rows="10">{{info[8] or ''}}</textarea>
+                </div>
+                
+                <div id="tema_input" class="trans-input-tema">
+                    <label> Tema :</label>
+                    <div class="select-border-tema">
+                        <div class="select-comp-tema">
+                            <input type="checkbox" value="música" name="temas" {% if 'música' in info[11] %}checked{% endif %}> Música
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" value="deporte" name="temas" {% if 'deporte' in info[11] %}checked{% endif %}> Deporte
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" value="ciencias" name="temas" {% if 'ciencias' in info[11] %}checked{% endif %}> Ciencias
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" value="religión" name="temas" {% if 'religión' in info[11] %}checked{% endif %}> Religión
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" value="política" name="temas" {% if 'política' in info[11] %}checked{% endif %}> Política
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" value="tecnología" name="temas" {% if 'tecnología' in info[11] %}checked{% endif %}> Tecnología
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" value="juegos" name="temas" {% if 'juegos' in info[11] %}checked{% endif %}>  Juegos
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" value="baile" name="temas" {% if 'baile' in info[11] %}checked{% endif %}> baile
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" value="comida" name="temas" {% if 'comida' in info[11] %}checked{% endif %}> Comida
+                        </div>
+
+                        <div class="select-comp-tema">
+                            <input type="checkbox" value="otro" name="temas" onchange="updateTema(this)" {% if 'otro' in info[11] %}checked{% endif %}> Otra
+                            <input type="text" id="otro" name="otro_id" style="display: none;" placeholder="Descripción del tema" class="select-input-tema" minlength="3" maxlength="15" {% if 'otro' in info[11] %}style="display: block;" value="{{ info[12] or '' }}"{% endif %}{% if 'otro' not in info[11] %}style="display: none;"{% endif %}>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="file-container" class="trans-input-file">
+                    <label for="file">Foto :</label>
+                    <input id="file" name="file[]" type="file" required>
+                    <button type="button" id="add-photo" class="button_fin">
+                        Otra foto
+                    </button>
+                </div>
+
+                <input type="submit" value=" Agregar actividad" class="button_fin">
+            </form>          
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/conf_formulario.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/auxil_formulario.js') }}"></script>
+
+</body>
+
+</html>

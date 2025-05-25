@@ -1,0 +1,682 @@
+/*
+/*
+/*
+/*
+/*
+Pagina Index
+/*
+/*
+/*
+/*
+*/
+
+
+.table {
+    position : relative;
+    width : 80%;
+    left : 10%;
+    border-collapse: collapse;
+    border : 1px;
+}
+
+
+th, td, tr {
+    border: 2px solid black;
+    padding: 10px; 
+    text-align: center; 
+    vertical-align: middle;
+}
+
+
+.container_description {
+    position:relative;
+    width:60%;
+    left :20%;
+    top : 10px;
+    padding: 20px;
+    font-size:25px;
+    text-align: center;
+    color : darkred;
+    margin-bottom: 50px;
+    margin-top : 50px;
+}
+
+img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+}
+
+.header {
+    position: relative; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100px; 
+    background-color: brown; 
+    color: white; 
+    text-align: center;
+    line-height: 60px; 
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    z-index: 1000; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    resize: both;
+}
+
+.container_info{
+    position:relative;
+    width:600px;
+    height:75px;
+    top:50px;
+    left: 50px;
+    background-color: white;
+    border: 1px solid darkred; 
+    display:flex;
+    resize: both;
+}
+
+.separator {
+    position:relative;
+    background-color: brown;     
+    display: inline-block; 
+    vertical-align: middle; 
+    width:2px;
+    height:60px;
+    top:7px;
+}
+    
+.contact{
+    position:relative;
+    color:brown;
+    text-decoration:none;
+    width:200px;
+    height:75px;
+    font-size: 16px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    text-align: center; 
+    justify-content: center;
+    padding-top: 15px;
+} 
+
+.contact:hover {
+    background-color: whitesmoke;
+    border-top: 1px solid darkred;
+    border-bottom: 1px solid darkred;
+}
+
+
+
+
+
+
+
+
+/*
+/*
+/*
+/*
+/*
+Pagina Agregar_actividad
+/*
+/*
+/*
+/*
+*/
+
+
+.pagina-agregar .trans-input-contact{
+    display: none;
+    align-items: center;
+    left:10px;
+    margin-bottom: 20px;
+}
+    
+
+.pagina-agregar .trans-input-select {
+    position : relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; 
+    left : 5%;
+} 
+
+.pagina-agregar .trans-input-select select{
+    margin-left: 10px; 
+    width : 50%;
+}
+
+.pagina-agregar .trans-input-contact input {
+    position:relative;
+    width: 90%; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    align-items:center;
+}
+
+.pagina-agregar .content{
+    position : relative;
+    display : flex;
+    justify-content: center;
+    padding-right: 50px;
+    opacity: 1;
+}
+
+
+
+.pagina-agregar .container-form{
+    position : relative;
+    width : 50%;
+    top:130px;
+    background-color: white; 
+    border: 3px solid darkred; 
+    border-radius: 10px; 
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); 
+    text-align: center; 
+}
+
+
+
+.pagina-agregar .title-transport{
+    height: 40px;
+    font-size: 20px;
+    color:darkred
+}
+
+.pagina-agregar .trans-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; 
+}
+
+.pagina-agregar .trans-input input {
+    position:relative;
+    left:5%;
+    width: 90%; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    align-items:center;
+}
+
+.pagina-agregar .trans-input-tema {
+    position : relative;
+    left : 10%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; 
+} 
+
+.pagina-agregar .trans-input-tema select{
+    margin-left: 20px; 
+}
+
+.pagina-agregar .trans-input textarea{
+    display: flex;
+    position: relative;
+    width : 80%;
+    left : 10%; 
+    text-align: center;
+    align-items:center;
+}
+
+.pagina-agregar .trans-input-file input{
+    position:relative;
+    width: 50%; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    align-items:center;
+    margin-bottom: 20px; 
+    margin-right: 10px;
+}
+
+.pagina-agregar .trans-input-date input {
+    position:relative;
+    width: 50%; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    align-items:center;
+    margin-bottom: 20px; 
+
+}
+
+
+.pagina-agregar select {
+    width: 60%; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 16px;
+    margin-bottom: 20px; 
+}
+
+.pagina-agregar hr{
+    position : relative;
+    color : brown;
+    width : 90%;
+    left:5%;
+}
+
+.pagina-agregar .bouton button {
+    background-color: brown;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    height : 50px;
+}
+
+.pagina-agregar .button_fin {
+    background-color: darkred;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    height : 50px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.pagina-agregar .bouton button:hover {
+    background-color: darkred;
+}
+
+.pagina-agregar .button_fin:hover {
+    background-color: brown;
+}
+
+
+
+.pagina-agregar .modal {
+    display: none; 
+    position: fixed;
+    border: 2px solid darkred;
+    height : 30%;
+    width: 31%;
+    left : 32.5%;
+    top : 35%;
+    border-radius: 10px;
+}
+
+.pagina-agregar .modal-content {
+    display : block;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    height : 100%;
+}
+
+
+
+.pagina-agregar #btnSi {
+    position : relative;
+    width : 30%;
+    background-color: darkgreen;
+    color: white;
+    margin-right: 10%;
+}
+
+.pagina-agregar #btnNo {
+    position : relative ; 
+    width : 30%;
+    background-color: darkred;
+    color: white;
+    text-align: center;
+}
+
+
+.pagina-agregar .confirm {
+    display: none; 
+    position: fixed;
+    border: 2px solid darkred;
+    width: 30%;
+    left : 40%;
+    top: 30%;
+    border-radius: 10px;
+}
+
+.pagina-agregar .confirm-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+.pagina-agregar a{
+    color : white;
+    background-color: darkred;
+    width : 50%;;
+    height: 60px;
+    border-radius: 5px;
+    margin-right: 20px;
+    left : 25%;
+}
+
+
+.pagina-agregar .select-border{
+    border: 3px solid darkred; 
+    border-radius: 10px; 
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); 
+    width : 70%;
+    display : flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 20px;
+    padding: 10px;
+    gap : 10px;
+}
+
+.pagina-agregar .select-comp{
+    width : 100%;
+    display : flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.pagina-agregar .select-input {
+    width : 70%;
+}
+
+.pagina-agregar .select-border-tema{
+    border: 3px solid darkred; 
+    border-radius: 10px; 
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); 
+    width : 70%;
+    display : flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 20px;
+    padding: 10px;
+    gap : 5px;
+}
+
+.pagina-agregar .select-comp-tema{
+    width : 100%;
+    display : flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.pagina-agregar .select-input-tema {
+    width : 80%;
+}
+
+
+
+
+
+
+/*
+/*
+/*
+/*
+/*
+Pagina estadisticas
+/*
+/*
+/*
+/*
+*/
+.pagina-estadisticas .content {
+    position: relative;
+    display: block;
+    align-items: center;
+    text-align: center;
+    color : darkred;
+}
+
+.pagina-estadisticas a{
+    position : relative;
+    color : white;
+    background-color: darkred;
+    width : 15%;
+    height: 60px;
+    left:42.5%;
+    border-radius: 5px;
+    margin-top: 50px;
+}
+
+.pagina-estadisticas .estadistica {
+    position : relative;
+    width : 80%;
+    left : 10%;
+    margin-top: 50px;
+}
+
+.pagina-estadisticas b{
+    color : black;
+    font-size: 20px;
+}
+
+
+
+/*
+/*
+/*
+/*
+/*
+Pagina lista 
+/*
+/*
+/*
+/*
+*/
+.pagina-lista .content {
+    position: relative;
+    display: block;
+    align-items: center;
+    text-align: center;
+    color : darkred;
+    top : 50px;
+}
+
+.pagina-lista table {
+    margin-top: 50px;
+    width : 90%;
+    left:5%;
+    border : 1px;
+}
+
+.pagina-lista .contact{
+    position : relative;
+    color : white;
+    background-color: darkred;
+    width : 15%;
+    height: 60px;
+    left:42.5%;
+    border-radius: 5px;
+    margin-top: 50px;
+}
+
+.pagina-lista th, td {
+    text-align: center; 
+    vertical-align: middle; 
+}
+
+.pagina-lista .precedent {
+    position : relative;
+    color : white;
+    background-color: darkred;
+    width : 10%;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 50px;
+    align-items: center;
+} 
+
+.pagina-lista .suivant {
+    position : relative;
+    color : white;
+    background-color: darkred;
+    width : 10%;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 50px;
+    align-items: center;
+} 
+
+.pagina-lista .texte_page {
+    position : relative;
+    color : black;
+    border-radius: 5px;
+    margin-top: 50px;
+    margin-right: 30px;
+    margin-left: 30px;
+} 
+
+.pagina-lista .pagination {
+    position : relative;
+    color : white;
+    width : 100%;
+    border-radius: 5px;
+    margin-top: 50px;
+    display: flex;               
+    justify-content: center;
+    align-items: center;
+
+} 
+
+
+
+
+
+
+
+/*
+/*
+/*
+/*
+/*
+Pagina Información
+/*
+/*
+/*
+/*
+*/
+.pagina-información .content {
+    position: relative;
+    display: block;
+    align-items: center;
+    text-align: center;
+    color : darkred;
+    top : 50px;
+}
+
+
+
+.pagina-información a{
+    color : white;
+    background-color: darkred;
+    width : 40%;;
+    height: 60px;
+    border-radius: 5px;
+    margin-right: 20px;
+    left : 10%;
+}
+
+.pagina-información .descri {
+    position : relative;
+    border: 2px solid darkred;
+    top : 20px;
+    width : 90%;
+    left : 5%;
+    text-align: left;
+    padding : 20px;
+}
+
+.pagina-información .text {
+    margin-left: 20px;
+    margin-bottom: 50px;
+    color : black;
+}
+
+.pagina-información .boton{
+    background-color: white;
+    border : none;
+}
+
+.pagina-información .foto {
+    width: 320px;
+    height: 240px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+
+.pagina-información .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden; 
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.pagina-información .popup {
+    position: relative;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.pagina-información .popup img {
+    width: 800px;
+    height: 600px;
+    border-radius: 5px;
+}
+
+.pagina-información .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: darkred;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.pagina-información .overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.pagina-información .final{
+    position : relative;
+    display : flex;
+    width : 40%;
+    height : 80px;
+    top : 50px;
+    left : 30%;
+}
+
