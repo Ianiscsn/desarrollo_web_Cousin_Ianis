@@ -54,12 +54,12 @@
                     <img src="{{ url_for('static', filename=foto.ruta_archivo.replace('static/', '').replace('\\', '/')) }}" alt="" width="100">               
                  </div>
             </div>
-            {% endfor %}          
-
+            {% endfor %}    
+            
             {% if actividad.comentario %}
                 <br> <br> <br> <b>Partie V : Comentarios</b> 
                 <br> <br>
-                <div class="text">
+                <div id="comentarios">
                     {% for come in actividad.comentario %}
                         <i>{{ come.nombre}} comento el {{come.fecha}} </i> : <b>{{come.texto}}</b> <br>
                     {% endfor %}
@@ -70,20 +70,20 @@
         <br>
         <b>Agregar Comentario</b> 
         <br> <br>
-        <form class="transport-form" action="{{ url_for('info') }}?id={{ actividad.id }}" method="post" enctype=multipart/form-data>
-            {% if mensaje %}
-                <p> {{mensaje}} </p>
-            {% endif %}
+        <form id="comentarioForm">
+            <div id="mensaje"></div>
+
+            <input id="id_actividad" type="hidden" value="{{actividad.id}}"> 
 
             <div id="Sector_input" class="trans-input">
-                <input id="nombre_com" name="nombre_com" placeholder="Nombre" type="text"  maxlength="80" minlength="3" value="{{info[0] or ''}}" required >
+                <input id="nombre_com" name="nombre_com" placeholder="Nombre" type="text"  maxlength="80" minlength="3"  required >
             </div>
 
             <div id="descripción_input" class="trans-input">
-                <textarea id="coment" name="coment" placeholder="Comentario" cols="50" rows="4" minlength="5" required>{{info[1] or ''}}</textarea>
+                <textarea id="coment" name="coment" placeholder="Comentario" cols="50" rows="4" minlength="5" required></textarea>
             </div>
             
-            <input type="submit" value=" Agregar comentario" class="button_fin" onclick="check_info()">
+            <input type="submit" value=" Agregar comentario" class="button_fin" >
 
         </form>
 

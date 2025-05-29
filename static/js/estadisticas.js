@@ -14,24 +14,19 @@ $(function() {
                 title: {
                     text: 'Grafico 1 : Cantidades de actividades por dia'
                 },
-
                 yAxis: {
                     title: {
                         text: 'Cantidad de actividades'
                     }
                 },
-
                 xAxis: {
                     categories: ['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'],
                 },
-
                 legend: {
                     layout: 'vertical',
                     align: 'right',
                     verticalAlign: 'middle'
                 },
-
-
                 series: data[0],
 
                 responsive: {

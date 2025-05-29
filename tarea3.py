@@ -7,7 +7,7 @@ from sqlalchemy.orm import Mapped, joinedload, relationship
 from sqlalchemy import String, Integer, DateTime, ForeignKey, Enum, func
 
 from flask import Flask
-from flask import request, render_template, redirect, url_for, flash, make_response
+from flask import request, render_template, redirect, url_for, flash, make_response, jsonify
 
 import filetype
 from werkzeug.utils import secure_filename
@@ -240,11 +240,9 @@ def lis_act():
 
 
 
-@app.route('/listados_actividades/informacion', methods=['POST', 'GET'])
+@app.route('/listados_actividades/informacion', methods=['GET'])
 def info():
-    info = []
     id = request.args.get("id")
-    print(id)
     session = getSession()
     actividad = session.execute(
         select(Actividad)
@@ -257,18 +255,42 @@ def info():
         )
         .where(Actividad.id == id)
     ).unique() .scalar_one_or_none() 
-
-    if request.method == 'POST':
-        agrega = agregar_comentario(request.form['nombre_com'],request.form['coment'], id, session)
-        info = [request.form['nombre_com'],request.form['coment']]
-        if agrega != True: 
-            return render_template('información.html', actividad=actividad, info = info, mensaje = agrega)
-        else :
-            return render_template('información.html', actividad=actividad, info = [], mensaje = 'Comentario agregado')
  
-    return render_template('información.html', actividad=actividad, info = info, mensaje="")
+    return render_template('información.html', actividad=actividad)
 
+@app.route('/agregar_comentario', methods=['POST'])
+def agregar_comentario_ajax():
+    session = getSession()
+    id = request.args.get("id")
+    nombre = request.form.get("nombre_com", "").strip()
+    texto = request.form.get("coment", "").strip()
 
+    if not (3 <= len(nombre) <= 80):
+        return jsonify({"exito": False, "mensaje": "Nombre debe tener entre 3 y 80 caracteres."})
+    if len(texto) < 5:
+        return jsonify({"exito": False, "mensaje": "Comentario debe tener al menos 5 caracteres."})
+
+    actividad = session.get(Actividad, id)
+    if not actividad:
+        return jsonify({"exito": False, "mensaje": "Actividad no encontrada."})
+
+    nuevo_com = Comentario(nombre=nombre, texto=texto, fecha=datetime.now(), actividad=actividad)
+    try : 
+        session.add(nuevo_com)
+        session.commit()
+
+        return jsonify({
+            "exito": True,
+            "mensaje": "Comentario agregado.",
+            "nombre": nombre,
+            "texto": texto,
+            "fecha": nuevo_com.fecha.strftime("%Y-%m-%d %H:%M")
+        })
+    except Exception as e:
+        app.logger.error("Error con base de datos: {0} ".format(str(e)))
+        session.rollback()
+    
+    
 
 "--------------------------------------------------"
 
