@@ -1,6 +1,6 @@
 # Tarea 3 : Ianis Cousin
 
-El proyecto es similar a la tarea 2. Debe ejecutar el archivo tarea3.py para lanzar la aplicación y seguir los mismos pasos para la base de datos (yo añadí INSERTs en el archivo init.sql para añadir comentarios iniciales). He creado dos archivos javascript: conf_comentario.js para comprobar las entradas en el formulario que permite añadir un comentario, y estadisticas.js, que crea los tres gráficos usando Ajax y los datos necesarios.
+El proyecto es similar a la tarea 2. Debe ejecutar el archivo tarea3.py para lanzar la aplicación y seguir los mismos pasos para la base de datos (yo añadí INSERTs en el archivo init.sql para añadir comentarios iniciales). He creado dos archivos javascript: conf_comentario.js para comprobar las entradas en el formulario que permite añadir un comentario y enviar el formulario usando XHR, y estadisticas.js, que crea los tres gráficos usando Ajax y los datos necesarios.
 
 
 # Tarea 2 : Ianis Cousin 
