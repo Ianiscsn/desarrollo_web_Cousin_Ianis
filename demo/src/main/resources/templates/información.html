@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tâche 4</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
+<body class="pagina-información">
+<div class="content" th:if="${actividad != null}">
+    <h1> Musée de l'Antiquité </h1>
+
+    <div class="descri">
+        <b>Partie I : Où ?</b> <br>
+        <div class="text">
+            <b>Région :</b> <span th:text="${actividad.comuna.region.nombre}"></span><br>
+            <b>Commune :</b> <span th:text="${actividad.comuna.nombre}"></span><br>
+            <b>Secteur :</b> <span th:text="${actividad.sector}"></span><br>
+        </div>
+
+        <b>Partie II : Qui organise ?</b>
+        <div class="text">
+            <b>Nom :</b> <span th:text="${actividad.nombre}"></span><br>
+            <b>Email :</b> <span th:text="${actividad.email}"></span><br>
+            <b>Numéro de portable :</b> <span th:text="${actividad.celular}"></span><br>
+            <b>Contacté par :</b>
+            <span th:each="cont, iterStat : ${actividad.contact}">
+                <span th:text="${cont.nombre}"></span> (Id : <span th:text="${cont.identificador}"></span>)<span th:if="${!iterStat.last}"> / </span>
+            </span>
+            <br>
+        </div>
+
+        <b>Partie III : Quand et de quoi s'agit-il ?</b>
+        <div class="text">
+            <b>Date et heure de début :</b> <span th:text="${actividad.diaHoraInicio}"></span><br>
+            <b>Date et heure de fin :</b> <span th:text="${actividad.diaHoraTermino}"></span><br>
+            <b>Description :</b> <span th:text="${actividad.descripcion}"></span><br>
+            <b>Thème :</b>
+            <span th:each="tema, iterStat : ${actividad.temas}">
+                <span th:text="${tema.tema}"></span><span th:if="${!iterStat.last}">, </span>
+            </span><br>
+        </div>
+
+        <b>Partie IV : Photos</b> <br>
+
+        <div th:each="foto : ${actividad.fotos}">
+            <button class="boton" th:onclick="'ampliar(\'' + ${foto.id} + '\')'">
+                <img th:src="@{/imagen/{filename}(filename=${foto.nombreArchivo})}" alt="" width="100" class="foto">
+            </button>
+
+            <div class="overlay" th:id="'popup' + ${foto.id}">
+                <div class="popup">
+                    <button class="close-btn" th:onclick="'fermer(\'' + ${foto.id} + '\')'">X</button>
+                    <img th:src="@{/imagen/{filename}(filename=${foto.nombreArchivo})}" alt="" width="100">
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${actividad.comentario != null}">
+            <br><br><br><b>Partie V : Commentaires</b><br><br>
+            <div id="comentarios">
+                <div th:each="come : ${actividad.comentario}">
+                    <i th:text="${come.nombre} + ' a commenté le ' + ${come.fecha}"></i> :
+                    <b th:text="${come.texto}"></b><br>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <b>Ajouter un commentaire</b><br><br>
+        <form id="comentarioForm">
+            <div id="mensaje"></div>
+
+            <input id="id_actividad" type="hidden" th:value="${actividad.id}">
+
+            <div id="Sector_input" class="trans-input">
+                <input id="nombre_com" name="nombre_com" placeholder="Nom" type="text" maxlength="80" minlength="3" required>
+            </div>
+
+            <div id="descripción_input" class="trans-input">
+                <textarea id="coment" name="coment" placeholder="Commentaire" cols="50" rows="4" minlength="5" required></textarea>
+            </div>
+
+            <input type="submit" value="Ajouter un commentaire" class="button_fin">
+        </form>
+
+        <div class="final">
+            <a th:href="@{/listados_actividades}" class="contact">
+                <p>Liste des activités</p>
+            </a>
+            <a th:href="@{/index}" class="contact">
+                <p>Page principale</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/image.js}"></script>
+<script th:src="@{/js/conf_comentario.js}"></script>
+
+</body>
+</html>

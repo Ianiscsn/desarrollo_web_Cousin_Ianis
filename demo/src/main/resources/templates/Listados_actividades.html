@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarea 4</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+
+<body class="pagina-lista">
+    <div class="content">
+        <h1>Listados de las actividades</h1>
+
+        <table class="table" th:if="${actividades != null and !actividades.isEmpty()}">
+            <tbody>
+                <tr>
+                    <th>Inicio</th>
+                    <th>Término</th>
+                    <th>Comuna</th>
+                    <th>Sector</th>
+                    <th>Tema</th>
+                    <th>Nombre Organizador</th>
+                    <th>Total Fotos</th>
+                </tr>
+
+                <tr th:each="p : ${actividades}" 
+                    th:onclick="|window.location.href='@{/listados_actividades/informacion/{id}(id=${p.id})}'|" 
+                    style="cursor: pointer;">
+                    <td th:text="${p.diaHoraInicio}"></td>
+                    <td th:text="${p.diaHoraTermino}"></td>
+                    <td th:text="${p.comuna.nombre}"></td>
+                    <td th:text="${p.sector}"></td>
+                    <td>
+                        <span th:each="tema, iterStat : ${p.temas}">
+                            <span th:text="${tema.tema}"></span><span th:if="${!iterStat.last}">, </span>
+                        </span>
+                    </td>
+                    <td th:text="${p.nombre}"></td>
+                    <td>
+                        <img th:if="${p.fotos != null and !p.fotos.isEmpty()}" 
+                             th:src="@{${p.fotos[0].rutaArchivo.replace('static/', '')}}" 
+                             alt="" width="100" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <a th:if="${page > 1}" th:href="@{/listados_actividades(page=${page - 1})}" class="precedent">Précédent</a>
+            <p class="texte_page">Page <span th:text="${page}"></span> / <span th:text="${total_pages}"></span></p>
+            <a th:if="${page < total_pages}" th:href="@{/listados_actividades(page=${page + 1})}" class="suivant">Suivant</a>
+        </div>
+
+        <a th:href="@{/index}" class="contact">
+            <p>Pagina principal</p>
+        </a>
+    </div>
+</body>
+</html>

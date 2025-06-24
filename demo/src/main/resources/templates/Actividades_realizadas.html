@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea 4</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
+<body class="pagina-realizadas">
+    <div class="content" id="content-real">
+        <h1> Listados de las actividades realizadas</h1>
+        <br>
+
+        <table class="table" th:if="${actividades}">
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>Inicio</th>
+                    <th>Sector</th>
+                    <th>Nombre</th>
+                    <th>Tema</th>
+                    <th>Nota</th>
+                    <th></th>
+                </tr>
+
+                <tr th:each="p : ${actividades}">
+                    <td th:text="${p.id}">1</td>
+                    <td th:text="${p.diaHoraInicio}">2025-06-01</td>
+                    <td th:text="${p.sector}">Sector</td>
+                    <td th:text="${p.descripcion}">Descripción</td>
+                    <td>
+                        <span th:each="tema, iter : ${p.temas}"
+                              th:text="${tema.tema + (iter.last ? '' : ', ')}">
+                        </span>
+                    </td>
+                    <td>
+                        <div th:id="'nota_' + ${p.id}" 
+                             th:text="${promedios[p.id] != null ? promedios[p.id] : '-'}">-</div>
+                    </td>
+                    <td>
+                        <button th:onclick="'open_notas(' + '\'' + ${p.id} + '\'' + ')'">evaluar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/index}" class="contact">
+            <p> Página principal </p>
+        </a>
+    </div>
+
+    <div id="notas" class="notas">
+        <div class="modal-content">
+            <button onclick="close_notas()">X</button>
+            <br>
+            <form onsubmit="agr_nota(); return false;">
+                <label for="nota">Nota:</label>
+                <input type="number" id="nota" name="nota" min="1" max="7" step="1" value="4">
+                <input type="submit" value="Agregar nota" class="button_fin">
+            </form>
+        </div>
+    </div>
+
+    <script th:src="@{/js/notas.js}"></script>
+</body>
+</html>

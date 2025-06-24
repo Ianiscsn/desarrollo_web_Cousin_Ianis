@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarea 4</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="pagina-agregar">
+<div id="content" class="content">
+    <div class="container-form">
+        <br>
+        <div class="title-transport"><b>Agregar Actividad</b></div>
+        <br>
+
+        <ul th:if="${mensaje}" style="color: red;">
+            <li><strong th:text="${mensaje}"></strong></li>
+        </ul>
+
+        <form class="transport-form" th:action="@{/actividad/agregar}" method="post">
+
+            <p><b>Partie I : ¿Dónde?</b></p>
+
+            <label for="región">Región :</label>
+            <select id="región" name="región">
+                <option value="none">Seleccione una región</option>
+                <option value="arica" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'arica'">Región de Arica y Parinacota</option>
+                <option value="tarapaca" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'tarapaca'">Región de Tarapacá</option>
+                <option value="antofagasta" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'antofagasta'">Región de Antofagasta</option>
+                <option value="atacama" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'atacama'">Región de Atacama</option>
+                <option value="coquimbo" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'coquimbo'">Región de Coquimbo</option>
+                <option value="valparaiso" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'valparaiso'">Región de Valparaíso</option>
+                <option value="santiago" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'santiago'">Región Metropolitana de Santiago</option>
+                <option value="ohiggins" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'ohiggins'">Región del Libertador General Bernardo O'Higgins</option>
+                <option value="maule" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'maule'">Región del Maule</option>
+                <option value="ñuble" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'ñuble'">Región de Ñuble</option>
+                <option value="biobio" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'biobio'">Región del Biobío</option>
+                <option value="araucania" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'araucania'">Región de La Araucanía</option>
+                <option value="losrios" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'losrios'">Región de Los Ríos</option>
+                <option value="loslagos" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'loslagos'">Región de Los Lagos</option>
+                <option value="aysen" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'aysen'">Región de Aysén del General Carlos Ibáñez del Campo</option>
+                <option value="magallanes" th:selected="${info != null and info.size() > 0 and info[0] != null and info[0] != ''} == 'magallanes'">Región de Magallanes y de la Antártica Chilena</option>
+            </select>
+
+            <br>
+
+            <label for="comuna">Comuna :</label>
+            <select id="comuna" name="comuna" th:attr="data-selected=${info != null and info.size() > 0 and info[1]!= null and info[1] != ''? info[1] : ''}">
+                <option value="none">Seleccione una comuna</option>
+            </select>
+
+            <div class="trans-input">
+                <input id="sector" name="sector" placeholder="Sector" type="text" maxlength="100" th:value="${info != null and info.size() > 0 and info[2]!= null and info[2] != ''? info[2] : ''}">
+            </div>
+
+            <hr>
+            <p><b>Partie II : ¿Quién organiza?</b></p>
+
+            <div class="trans-input">
+                <input id="nombre" name="nombre" placeholder="Nombre" type="text" maxlength="200" th:value="${info != null and info.size() > 0 and info[3]!= null and info[3] != '' ? info[3] : ''}" required>
+            </div>
+
+            <div class="trans-input">
+                <input id="email" name="email" placeholder="Email" type="email" maxlength="200" th:value="${info != null and info.size() > 0 and info[4]!= null and info[4] != '' ? info[4] : ''}" required>
+            </div>
+
+            <div class="trans-input">
+                <input id="tel" name="tel" placeholder="Número de celular" type="tel" th:value="${info != null and info.size() > 0 and info[5]!= null and info[5] != '' ? info[5] : ''}">
+            </div>
+
+            <div class="trans-input-select">
+    
+                <label> Contact </label>
+                <div class="select-border">
+
+                    <div class="select-comp">
+                        <input type="checkbox" name="contact_method" value="whatsapp" 
+                            onchange="updateLabel(this)" 
+                            th:checked="${info != null and info.size() > 10 and info[10].containsKey('whatsapp')}"> Whatsapp
+                        <input type="text" name="whatsapp_id" id="whatsapp" placeholder="ID" class="select-input" minlength="4" maxlength="50"
+                            th:style="${(info != null and info.size() > 10 and info[10].containsKey('whatsapp'))} ? 'display: block;' : 'display: none;'"
+                            th:value="${info != null and info.size() > 10 and info[10].containsKey('whatsapp') ? info[10]['whatsapp'] : ''}" />
+                    </div>
+
+                    <div class="select-comp">
+                        <input type="checkbox" name="contact_method" value="telegram" 
+                            onchange="updateLabel(this)" 
+                            th:checked="${info != null and info.size() > 10 and info[10].containsKey('telegram')}"> Telegram
+                        <input type="text" name="telegram_id" id="telegram" placeholder="ID" class="select-input" minlength="4" maxlength="50"
+                            th:style="${(info != null and info.size() > 10 and info[10].containsKey('telegram'))} ? 'display: block;' : 'display: none;'"
+                            th:value="${info != null and info.size() > 10 and info[10].containsKey('telegram') ? info[10]['telegram'] : ''}" />
+                    </div>
+
+                    <div class="select-comp">
+                        <input type="checkbox" name="contact_method" value="x" 
+                            onchange="updateLabel(this)" 
+                            th:checked="${info != null and info.size() > 10 and info[10].containsKey('x')}"> X
+                        <input type="text" name="x_id" id="x" placeholder="ID" class="select-input" minlength="4" maxlength="50"
+                            th:style="${(info != null and info.size() > 10 and info[10].containsKey('x'))} ? 'display: block;' : 'display: none;'"
+                            th:value="${info != null and info.size() > 10 and info[10].containsKey('x') ? info[10]['x'] : ''}" />
+                    </div>
+
+                    <div class="select-comp">
+                        <input type="checkbox" name="contact_method" value="instagram" 
+                            onchange="updateLabel(this)" 
+                            th:checked="${info != null and info.size() > 10 and info[10].containsKey('instagram')}"> Instagram
+                        <input type="text" name="instagram_id" id="instagram" placeholder="ID" class="select-input" minlength="4" maxlength="50"
+                            th:style="${(info != null and info.size() > 10 and info[10].containsKey('instagram'))} ? 'display: block;' : 'display: none;'"
+                            th:value="${info != null and info.size() > 10 and info[10].containsKey('instagram') ? info[10]['instagram'] : ''}" />
+                    </div>
+
+                    <div class="select-comp">
+                        <input type="checkbox" name="contact_method" value="tiktok" 
+                            onchange="updateLabel(this)" 
+                            th:checked="${info != null and info.size() > 10 and info[10].containsKey('tiktok')}"> TikTok
+                        <input type="text" name="tiktok_id" id="tiktok" placeholder="ID" class="select-input" minlength="4" maxlength="50"
+                            th:style="${(info != null and info.size() > 10 and info[10].containsKey('tiktok'))} ? 'display: block;' : 'display: none;'"
+                            th:value="${info != null and info.size() > 10 and info[10].containsKey('tiktok') ? info[10]['tiktok'] : ''}"/>
+                    </div>
+
+                    <div class="select-comp">
+                        <input type="checkbox" name="contact_method" value="otra" 
+                            onchange="updateLabel(this)" 
+                            th:checked="${info != null and info.size() > 10 and info[10].containsKey('otra')}"> Otra
+                        <input type="text" name="otra_id" id="otra" placeholder="ID" class="select-input" minlength="4" maxlength="50"
+                            th:style="${(info != null and info.size() > 10 and info[10].containsKey('otra'))} ? 'display: block;' : 'display: none;'"
+                            th:value="${info != null and info.size() > 10 and info[10].containsKey('otra') ? info[10]['otra'] : ''}" />
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <p><b>Partie III : ¿Cuándo y de qué trata?</b></p>
+
+            <div class="trans-input-date">
+                <label for="date_in">Inicio : </label>
+                <input id="date_in" name="date_in" type="datetime-local" th:value="${info != null and info.size() > 0 and info[6]!= null and info[6] != '' ? info[6] : ''}" required>
+            </div>
+
+            <div class="trans-input-date">
+                <label for="date_ter">Término : </label>
+                <input id="date_ter" name="date_ter" type="datetime-local" th:value="${info != null and info.size() > 0 and info[7]!= null and info[7] != '' ? info[7] : ''}">
+            </div>
+
+            <div class="trans-input">
+                <textarea id="descripción" name="descripción" placeholder="Descripción" cols="50" rows="10" th:text="${info != null and info.size() > 0 and info[8]!= null and info[8] != '' ? info[8] : ''}"></textarea>
+            </div>
+
+            <div id="tema_input" class="trans-input-tema">
+                <label> Tema :</label>
+                <div class="select-border-tema">
+
+                    <div class="select-comp-tema">
+                        <input type="checkbox" value="música" name="temas" 
+                            th:checked="${info != null and info.size() > 11 and info[11].contains('música')}"> Música
+                    </div>
+
+                    <div class="select-comp-tema">
+                        <input type="checkbox" value="deporte" name="temas" 
+                            th:checked="${info != null and info.size() > 11 and info[11].contains('deporte')}"> Deporte
+                    </div>
+
+                    <div class="select-comp-tema">
+                        <input type="checkbox" value="ciencias" name="temas" 
+                            th:checked="${info != null and info.size() > 11 and info[11].contains('ciencias')}"> Ciencias
+                    </div>
+
+                    <div class="select-comp-tema">
+                        <input type="checkbox" value="religión" name="temas" 
+                            th:checked="${info != null and info.size() > 11 and info[11].contains('religión')}"> Religión
+                    </div>
+
+                    <div class="select-comp-tema">
+                        <input type="checkbox" value="política" name="temas" 
+                            th:checked="${info != null and info.size() > 11 and info[11].contains('política')}"> Política
+                    </div>
+
+                    <div class="select-comp-tema">
+                        <input type="checkbox" value="tecnología" name="temas" 
+                            th:checked="${info != null and info.size() > 11 and info[11].contains('tecnología')}"> Tecnología
+                    </div>
+
+                    <div class="select-comp-tema">
+                        <input type="checkbox" value="juegos" name="temas" 
+                            th:checked="${info != null and info.size() > 11 and info[11].contains('juegos')}"> Juegos
+                    </div>
+
+                    <div class="select-comp-tema">
+                        <input type="checkbox" value="baile" name="temas" 
+                            th:checked="${info != null and info.size() > 11 and info[11].contains('baile')}"> baile
+                    </div>
+
+                    <div class="select-comp-tema">
+                        <input type="checkbox" value="comida" name="temas" 
+                            th:checked="${info != null and info.size() > 11 and info[11].contains('comida')}"> Comida
+                    </div>
+
+                    <div class="select-comp-tema">
+                        <input type="checkbox" value="otro" name="temas" onchange="updateTema(this)" 
+                            th:checked="${info != null and info.size() > 11 and info[11].contains('otro')}"> Otra
+                        <input type="text" id="otro" name="otro_id" placeholder="Descripción del tema" class="select-input-tema" minlength="3" maxlength="15"
+                            th:style="${(info != null and info.size() > 11 and info[11].contains('otro'))} ? 'display: block;' : 'display: none;'"
+                            th:value="${info != null and info.size() > 12 and info[12]!= null and info[12] != ''} ? info[12] : ''" />
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="trans-input-file" id="file-container">
+                <label for="file_0">Foto :</label>
+                <input id="file_0" name="files_0" type="file">
+                <button type="button" id="add-photo" class="button_fin">Otra foto</button>
+            </div>
+
+            <input type="submit" value="Agregar actividad" class="button_fin">
+        </form>
+    </div>
+</div>
+
+<script th:src="@{/js/conf_formulario.js}"></script>
+<script th:src="@{/js/auxil_formulario.js}"></script>
+
+</body>
+</html>
